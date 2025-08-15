@@ -12,6 +12,9 @@ try {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,  // max concurrent connections
+    queueLimit: 0
   });
   console.log('Connected to the Hostinger database successfully');
 } catch (err) {
