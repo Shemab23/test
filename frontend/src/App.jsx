@@ -7,7 +7,7 @@ const Message = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`${backendUrl}/`)
+    fetch(`${backendUrl}/api/`)
       .then(res => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
