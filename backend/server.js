@@ -1,16 +1,26 @@
-import express from 'express'
-import cors from 'cors'
+import express from "express";
+import cors from "cors";
 
-const PORT =  process.env.PORT || 3000;
-
+const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5174" }));
+const allowedOrigins = [
+  "https://test-6jby.onrender.com", // production frontend
+  "http://localhost:5173",           // dev frontend port
+  "http://localhost:5174"            // add any other dev port you use
+];
 
-app.get('/',(req,res)=>{
-    res.json({msg: "backend am in !!!"});
-})
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow Postman or curl with no origin
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error("Not allowed by CORS"));
+  }
+}));
 
-app.listen(PORT,()=>{
-    console.log(`Bckend is listening on port: ${PORT}`);
-})
+app.get("/", (req, res) => {
+  res.json({ msg: "backend am in !!!" });
+});
+
+app.listen(PORT, () => console.log(`Backend listening on port: ${PORT}`));
