@@ -11,6 +11,7 @@ app.use(cors());
 app.get("/api/", (req, res) => {
   res.json({ msg: "backend am in !!!" });
 });
+
 app.get("/api/users", async (req, res) => {
   try {
     const [rows] = await db.execute('SELECT * FROM user');
