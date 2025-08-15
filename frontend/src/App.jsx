@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './index.css'
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
 
@@ -17,7 +18,8 @@ const Message = () => {
   }, []);
 
   return (
-    <div>
+    <div className="contain">
+      frontend
       {error ? `Error: ${error}` : `Message from backend: ${message}`}
     </div>
   );
